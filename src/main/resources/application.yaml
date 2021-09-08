@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local
+  data:
+    mongodb:
+      uri: "mongodb://mongodb_example:pass@localhost/mongodb_example?retryWrites=true&w=majority&authSource=admin"
+server:
+  port: 8080
+vendors:
+  ph3a:
+    url: "http://localhost:8081/ph3a"
+  neoway:
+    url: "http://localhost:8081/neoway"
