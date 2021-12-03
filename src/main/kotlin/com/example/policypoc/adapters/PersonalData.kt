@@ -2,6 +2,8 @@ package com.example.policypoc.adapters
 
 import com.example.policypoc.vendors.neoway.dto.NeowayResponse
 import com.example.policypoc.vendors.ph3a.dto.Ph3aResponse
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonValue
 
 data class PersonalData(
     val name: String,
@@ -63,7 +65,7 @@ enum class DocumentStatus {
     CANCELLED,
     SUSPENDED,
     IRREGULAR,
-    DEAD
+    DEAD;
 }
 
 data class Address(

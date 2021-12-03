@@ -1,3 +1,26 @@
+context:
+  initializer:
+    classes: com.example.policypoc.infrastructure.configurations.WebConfiguration
+logentries:
+  token: ~
+logging:
+  level:
+    org:
+      zalando:
+        logbook: TRACE
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %highlight(%-5level) %magenta(%logger.%M) - %msg%n%rEx"
+logbook:
+  exclude:
+    - /health
+    - /favicon.ico
+    - /metrics
+management:
+  endpoints:
+    web:
+      base-path: ~
+      exposure:
+        include: health,metrics
 spring:
   profiles:
     active: local

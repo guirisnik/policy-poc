@@ -2,9 +2,11 @@ package com.example.policypoc.controllers.dto.policy
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import kotlin.reflect.KClass
+import kotlin.reflect.jvm.internal.impl.resolve.constants.KClassValue
 
 data class RecipeRequest(
-    val policy: List<Validation>
+    val policy: List<Validatable>
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -25,12 +27,7 @@ enum class Parameter {
 
 enum class Source {
     PH3A,
-    NEOWAY;
-
-    override fun toString(): String =
-        name
-            .split('_')
-            .joinToString { it.replaceFirstChar(Char::uppercase) }
+    NEOWAY
 }
 
 enum class Method(requiredConfiguration: Set<ConfigurationParameter>?) {

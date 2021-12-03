@@ -2,9 +2,8 @@ package com.example.policypoc.controllers
 
 import com.example.policypoc.controllers.dto.policy.RecipeRequest
 import com.example.policypoc.controllers.dto.policy.RecipeResponse
+import com.example.policypoc.data.models.PolicyId
 import com.example.policypoc.data.models.PolicyRecipe
-import com.example.policypoc.infrastructure.exceptions.EntityNotFoundException
-import com.example.policypoc.infrastructure.extensions.fold
 import com.example.policypoc.services.recipe.RecipeService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.util.Optional
-import java.util.UUID
 
 @RestController
 class PolicyController(
@@ -25,13 +22,10 @@ class PolicyController(
     fun create(@RequestBody recipe: RecipeRequest): ResponseEntity<RecipeResponse> =
         recipeService
             .save(recipe)
-            .let { ResponseEntity.status(HttpStatus.CREATED).body(RecipeResponse(it.id)) }
+            .let { ResponseEntity.status(HttpStatus.CREATED).body(RecipeResponse(it.policyId)) }
 
     @GetMapping("/policy/{id}")
-    fun read(@PathVariable id: UUID): ResponseEntity<PolicyRecipe> = recipeService
+    fun read(@PathVariable id: PolicyId): ResponseEntity<PolicyRecipe> = recipeService
         .find(id)
-        .fold(
-            { ResponseEntity.status(HttpStatus.OK).body(it) },
-            { throw EntityNotFoundException("Policy with id $id was not found") }
-        )
+        .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 }

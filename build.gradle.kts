@@ -24,14 +24,14 @@ dependencies {
 
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation ("com.github.kittinunf.fuel:fuel-jackson:2.3.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+")
 
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb:2.5.4")
     implementation("org.springframework.data:spring-data-mongodb:3.2.4")
 
+    implementation("org.zalando:logbook-spring-boot-starter:1.13.0")
+    implementation("net.logstash.logback:logstash-logback-encoder:6.4")
 
     implementation("org.apache.commons:commons-text:1.9")
-
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

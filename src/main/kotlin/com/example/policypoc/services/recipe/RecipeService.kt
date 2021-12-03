@@ -1,10 +1,10 @@
 package com.example.policypoc.services.recipe
 
 import com.example.policypoc.controllers.dto.policy.RecipeRequest
+import com.example.policypoc.data.models.PolicyId
 import com.example.policypoc.data.models.PolicyRecipe
 import com.example.policypoc.data.repositories.PolicyRecipeRepository
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class RecipeService(
@@ -13,11 +13,13 @@ class RecipeService(
     fun save(recipeRequest: RecipeRequest) =
         policyRecipeRepository.save(
             PolicyRecipe(
-                id = UUID.randomUUID(),
+                policyId = PolicyId.withPrefix("POL"),
                 recipe = recipeRequest.policy
             )
         )
 
-    fun find(id: UUID) =
-        policyRecipeRepository.findById(id)
+    fun find(id: PolicyId): PolicyRecipe =
+        policyRecipeRepository
+            .findById(id)
+            .orElseThrow()
 }
